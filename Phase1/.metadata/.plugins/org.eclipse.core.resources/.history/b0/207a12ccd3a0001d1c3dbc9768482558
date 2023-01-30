@@ -9,6 +9,7 @@ public class Menu {
 		{
 			int c=0;
 			int d=0;
+			int f =0;
 			Scanner choice = new Scanner(System.in);
 			SortedSet<String> temp1;
 			boolean check = true,check1 = true;
@@ -38,9 +39,9 @@ public class Menu {
 						}
 				catch (Exception e) {
 					System.out.println("Incorrect Option! Enter a number!  \n");
-					choice.nextLine();
+					choice.nextInt();
 				  }
-				}while ( check);
+				} while ( check);
 				if (c==1) {
 					temp1 = obj2.retrieveFiles();
 					if (temp1.isEmpty()) {
@@ -51,6 +52,7 @@ public class Menu {
 							System.out.println(value);
 						}
 						System.out.println("\n");
+
 					}
 				}
 				else if (c==2) {

@@ -4,13 +4,15 @@ import java.util.*;
 import java.io.IOException;
 
 public class FileOperations {
-	File path = new File(System.getProperty("user.dir"));// home directory so it can run in any environment
+	File path = new File(System.getProperty("user.dir"));// home directory
+	//File path =new File("C:\\Phase1\\");
 	String set [] = path.list();
-	SortedSet<String> temp = new TreeSet<String> (String.CASE_INSENSITIVE_ORDER); // To ignore case sensitive in the sorting
+	SortedSet<String> temp = new TreeSet<String> (String.CASE_INSENSITIVE_ORDER);
 	Scanner choice2= new Scanner(System.in);
 	String d;
+	//StringBuffer example = new StringBuffer(path.getAbsolutePath());
 	
-	// Method to retrieve the files - Adding the Array with all the names of the files to a SortedSet and then returning the SortedSet 
+	//this Function ....
 	public SortedSet<String> retrieveFiles(){ 
 	    set = path.list();
 		for (int i=0; i < set.length; i++) {
@@ -18,7 +20,7 @@ public class FileOperations {
 		}
 		return temp;		
 	}
-	//This Method adds a file, with exception handling in case there is a issue with the method of File createNewFile
+	//This Function ....
 	public void addFile() throws IOException 
 	{
 		System.out.println("Name of the File to be created ->");
@@ -30,11 +32,15 @@ public class FileOperations {
 		}else {System.out.println("File Already Exists! \n");}
 		
 	}
-	//This Method Searches a specific File Name in the directory
+	//This Function ...
 	public void search(){
 		System.out.println("Name of the File to be searched ->");
 		d = choice2.next();
+		//File temp = new File (path.getAbsolutePath()+"\\"+d);
+		//System.out.println(temp);
+		//System.out.println(temp.exists());
 		int b = this.findFile(d);
+		//System.out.println(b);
 		if (b >= 0) {
 			System.out.println("File Found! \n");
 		}else {System.out.println("File Not Found! \n");}
@@ -43,8 +49,11 @@ public class FileOperations {
 	public void deleteFile() {
 		System.out.println("Name of the File to be deleted ->");
 		d = choice2.next();
+		//File temp = new File (path.getAbsolutePath()+"\\"+d);
+		//temp.delete();
 		int a = this.findFile(d);
 		if (a>=0) {
+			//String x = set[a];
 		    File newFile1 = new File (path.getAbsolutePath()+"\\"+d);
 		    newFile1.delete();
 		}else {

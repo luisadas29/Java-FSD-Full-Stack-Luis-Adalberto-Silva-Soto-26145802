@@ -40,7 +40,7 @@ public class Menu {
 					System.out.println("Incorrect Option! Enter a number!  \n");
 					choice.nextLine();
 				  }
-				}while ( check);
+				} while ( check);
 				if (c==1) {
 					temp1 = obj2.retrieveFiles();
 					if (temp1.isEmpty()) {
@@ -51,6 +51,7 @@ public class Menu {
 							System.out.println(value);
 						}
 						System.out.println("\n");
+
 					}
 				}
 				else if (c==2) {
