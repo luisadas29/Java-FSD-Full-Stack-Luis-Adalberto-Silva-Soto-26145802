@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<h2> Account Customer creation</h2>
+<form action="#" th:action="@{/registerCustomer}" th:object="${login}" method="post">
+<label>EmailId</label>
+<input type="email" th:field="*{emailid}"/><br/>
+<label>Password</label>
+<input type="password" th:field="*{password}"/><br/>
+<label>Type of User</label><br/>
+<input type="radio" value="customer" th:field="*{typeOfUser}"/>Customer
+<br/>
+<input type="submit" value="Register"/>
+</form>
+<span th:text="${msg}"></span>
+<br/>
+<a th:href="@{/}">Login Page</a> |
+</body>
+</html>

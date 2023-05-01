@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<span th:text="${msg}"></span>
+<h2> Add Category </h2>
+<form action="#" th:action="@{/storeCategoryInfo}" th:object="${category}" method="post">
+<label>Category Name</label>
+<input type="text" th:field="*{categoryName}"/><br/>
+<input type="submit" value="Store Category"/>
+</form>
+<br/>
+<a th:href = "@{adminHomepage}">Back</a>
+</body>
+</html>

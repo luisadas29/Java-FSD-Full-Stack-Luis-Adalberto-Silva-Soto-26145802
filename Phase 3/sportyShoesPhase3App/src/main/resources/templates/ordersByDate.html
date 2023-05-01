@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Filter orders by Date</h2>
+<form action="#" th:action="@{/ordersByDate}" th:object="${orders}" method="post">
+<label>Date in yyyy-mm-dd format</label>
+<input type="orderPlaced" th:field="*{orderPlaced}"/><br/>
+<input type="submit" value="Search"/>
+</form>
+<br/>
+<a th:href="@{/adminHomepage}">Back</a>
+</body>
+</html>

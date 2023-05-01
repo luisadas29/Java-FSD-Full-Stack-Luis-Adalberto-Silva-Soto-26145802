@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<span th:text="${msg}"></span>
+	<h2>Add Product</h2>
+	<form action="#" th:action="@{/storeProductInfo}" th:object="${product}" method="post">
+	<label>Product Name</label>
+	<input type="text" th:field="*{pName}"/><br/>
+
+	<label>Price</label>
+	<input type="number" th:field="*{price}"/><br/>
+
+	<label> Quantity </label>
+	<input type="text" th:field="*{quantity}"/><br/>
+
+	<label>Category</label>
+	<select th:field="*{categoryID}">
+		<option value="">--Select Category--</option>
+		<option th:each="cc:${category}" th:value="${cc.cid}">
+		<span th:text="${cc.categoryName}"></span>
+		</option>
+	</select><br/>
+	<label>Product Image</label>
+	<input type="text" th:field="*{pImage}"/><br/>
+<input type="submit" value="Store Product"/>
+</form>
+<br/>
+<a th:href="@{/adminHomepage}">Back</a>
+</body>
+</html>

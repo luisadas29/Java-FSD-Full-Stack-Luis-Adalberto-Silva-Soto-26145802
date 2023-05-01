@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<th>Order ID</th>
+		<th>Date of Order</th>
+		<th>Product Ordered ID</th>
+		<th>Email ID of the User</th>
+		<th>Quantity of products ordered</th>
+	</tr>
+	<tr th:each="oo:${orders}">
+		<td th:text="${oo.ordersID}"></td>
+		<td th:text="${oo.orderPlaced}"></td>
+		<td th:text="${oo.productID}"></td>
+		<td th:text="${oo.emailID}"></td>
+		<td th:text="${oo.quantityOfProducts}"></td>
+	</tr>
+</table>
+<br/>
+<a th:href="@{/adminHomepage}">Back</a>
+</body>
+</html>
