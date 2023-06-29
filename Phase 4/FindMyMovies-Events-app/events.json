@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "id": 4,
+      "type": "Day Out",
+      "name": "Cinema",
+      "date": "3/8/2023",
+      "description": "Film in the Open park",
+      "location": "Hyde Park London"
+    },
+    {
+      "type": "test2",
+      "name": "test2",
+      "date": "test2",
+      "description": "test2",
+      "location": "test2",
+      "id": 6
+    }
+  ]
+}
