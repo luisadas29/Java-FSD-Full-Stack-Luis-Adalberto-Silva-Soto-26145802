@@ -1,0 +1,68 @@
+{
+    "questions":[
+        {
+          "qid": 1,
+          "question": "12 + 8 is equal to",
+          "options": [17, 21, 34, 20]
+        },
+        {
+          "qid": 2,
+          "question": "What City is the capital of England ? ",
+          "options": ["Madrid", "London", "Washington", "Berlin"]
+        },
+        {
+          "qid": 3,
+          "question": "India is in what continent",
+          "options": ["America", "Europe", "Asia", "Africa"]
+        },
+        {
+            "qid": 4,
+            "question": "How many Planets does the solar system have? ",
+            "options": [4, 5, 7, 8]
+          },
+          {
+            "qid": 5,
+            "question": "Name of the coffee shop in the tv sitcom Friends!",
+            "options": ["Central Perk", "Costa", "Starbucks", "Cafe Nero"]
+          },
+          {
+            "qid": 6,
+            "question": "Which country finance the voyage that discovered America?",
+            "options": ["Portugal", "Italy", "Spain", "England"]
+          },
+          {
+            "qid": 7,
+            "question": "Where is the biggest Colosseum located?",
+            "options": ["Bath", "Venice", "Sardigne", "Rome"]
+          },
+          {
+            "qid": 8,
+            "question": "In what year did the Titanic sink ?",
+            "options": ["1912", "1910", "1908", "1914"]
+          },
+          {
+            "qid": 9,
+            "question": "When did the Second world War Start?",
+            "options": ["1944", "1939", "1938", "1942"]
+          },
+          {
+            "qid": 10,
+            "question": "Do Black Holes Exist? ",
+            "options": ["Yes", "Maybe yes", "No", "Maybe Not"]
+          }
+      ],
+      
+    "answers":[
+        {"qid":1,"correctAns":"20"},
+        {"qid":2,"correctAns":"London"},
+        {"qid":3,"correctAns":"Asia"},
+        {"qid":4,"correctAns":"8"},
+        {"qid":5,"correctAns":"Central Perk"},
+        {"qid":6,"correctAns":"Spain"},
+        {"qid":7,"correctAns":"Rome"},
+        {"qid":8,"correctAns":"1912"},
+        {"qid":9,"correctAns":"1939"},
+        {"qid":10,"correctAns":"Yes"}
+    ]
+    
+}
