@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.medicare.Account;
 import com.medicare.Login;
 import com.repository.LoginRepository;
 
@@ -13,6 +14,10 @@ public class LoginService {
 	
 	@Autowired
 	LoginRepository loginRepository;
+	
+	@Autowired
+	AccountService accountService;
+	
 	
 	public String signIn(Login login) {
 
@@ -48,7 +53,12 @@ Optional<Login> result = loginRepository.findById(login.getEmailid());
 			if (result.isPresent()) {
 				return "Account already exist";
 			}else {
+				
+				Account acc = new Account();
+				acc.setAmount(1000);
+				acc.setEmailid(login.getEmailid());
 				loginRepository.save(login);
+				accountService.createAccount(acc);
 				return "Account created successfully";
 			}
 			

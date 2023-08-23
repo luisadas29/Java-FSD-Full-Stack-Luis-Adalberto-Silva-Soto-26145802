@@ -1,7 +1,12 @@
 package com.medicare;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Login {
@@ -9,6 +14,17 @@ public class Login {
 	private String emailid;
 	private String password;
 	private String typeOfUser;
+	@OneToMany
+	@JoinColumn(name="emailid")
+	private List<Account> account;
+	
+	
+	public List<Account> getAccount() {
+		return account;
+	}
+	public void setAccount(List<Account> account) {
+		this.account = account;
+	}
 	public String getEmailid() {
 		return emailid;
 	}
