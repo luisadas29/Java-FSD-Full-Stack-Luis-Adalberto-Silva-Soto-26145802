@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SignUp (){
     let [emailid,setEmailid]=useState("");
@@ -26,11 +27,11 @@ function SignUp (){
             <input type ="email" name ="emailid" onChange={e=>setEmailid(e.target.value)}/><br/>
             <label>Password</label>
             <input type ="password" name ="password" onChange={e=>setPassword(e.target.value)}/><br/>
-            <label>TypeOfUser</label>
-            <input type ="radio" name ="typeOfUser" value="admin" onChange={e=>setTypeOfUser(e.target.value)}/>Admin
-            <input type ="radio" name ="typeOfUser" value="customer" onChange={e=>setTypeOfUser(e.target.value)}/>Customer<br/>
+            <label></label>
+            <input type="radio" name="typeofuser" value="customer" onChange={e=>setTypeOfUser(e.target.value)}/>Customer<br/>           
             <input type="submit" value= "submit" />
-            <input type="reset" value= "reset" />
+            <input type="reset" value= "reset" /><br/>
+            <Link to="/">Login</Link>
             </form>
         </div>
     )

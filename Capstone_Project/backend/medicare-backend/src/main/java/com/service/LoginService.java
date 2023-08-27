@@ -19,21 +19,16 @@ public class LoginService {
 	AccountService accountService;
 	
 	
-	public String signIn(Login login) {
-
-		
-Optional<Login> result = loginRepository.findById(login.getEmailid());
-		
+	public String signIn(Login login) {	
+    Optional<Login> result = loginRepository.findById(login.getEmailid());
 		if(result.isPresent()) {
 			Login ll = result.get();
-			if(ll.getPassword().equals(login.getPassword())) {
-					
+			if(ll.getPassword().equals(login.getPassword())) {	
 					if(ll.getTypeOfUser().equals("admin")) {
 						return "Admin Success";
 					}else {
 						return "Customer success";
-					}
-					
+					}		
 			}else {
 				return "Password is wrong";
 			}
@@ -53,7 +48,6 @@ Optional<Login> result = loginRepository.findById(login.getEmailid());
 			if (result.isPresent()) {
 				return "Account already exist";
 			}else {
-				
 				Account acc = new Account();
 				acc.setAmount(1000);
 				acc.setEmailid(login.getEmailid());
