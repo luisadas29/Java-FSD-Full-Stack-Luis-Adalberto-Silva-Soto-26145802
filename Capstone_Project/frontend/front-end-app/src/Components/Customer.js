@@ -6,7 +6,8 @@ function Customer(){
     return(
         <div>
             <h2>Welcome to Customer Home Page</h2>
-            <Link to="viewMedicine">View Medicine</Link>
+            <Link to="browseMedical">Purchase Medicines!</Link> |
+            <Link to ="orders">View Past Orders</Link> |
             <Link to="/">Logout</Link> |
             <hr/>
             <Outlet></Outlet>

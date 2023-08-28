@@ -8,10 +8,15 @@ import Customer from './Components/Customer'
 import Homepage from './Components/Homepage'
 import AddMedicine from './Components/AddMedicine';
 import ViewMedicine from './Components/ViewMedicine';
+import BrowseMedical from "./Components/BrowseMedical";
+import React, { useState } from "react";
+import { UserProvider } from './UserContext';
+import Checkout from "./Components/Checkout";
 
 
 
 function App() {
+  const [basket, setBasket] = useState([]);
   return (
     <div className="App">
           <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -29,15 +34,10 @@ function App() {
               Signup
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to={"/browseMedical"} className="nav-link">
-              Browse Medical Supplies
-            </Link>
-          </li>
           </div> 
       </nav>
 
-
+      <UserProvider>
 
       <Routes>
 
@@ -49,12 +49,14 @@ function App() {
           <Route path ="addMedicine" element={<AddMedicine/>}/>
           <Route path ="viewMedicine" element={<ViewMedicine/>}/>
         </Route>
-        
-        <Route path='/customer' element={<Customer/>}>
-          <Route path ="viewMedicine" element={<ViewMedicine/>}/>
+        <Route path="/customer" element={<Customer basket={basket} setBasket={setBasket} />}>
+          <Route path="browseMedical" element={<BrowseMedical basket={basket} setBasket={setBasket} />} />
         </Route>
+        <Route path="/customer/checkout" element={<Checkout basketItems={basket} />} />
+
 
       </Routes>
+      </UserProvider>
     </div>
   );
 }

@@ -16,9 +16,24 @@ public class Medicine {
 	private String name;
 	private String description;
 	private String imageurl;
-	private boolean enable =true;
+	private boolean enable = true;
+	private double offer;
+	private float originalprice;
 	
 	
+	
+	public float getOriginalprice() {
+		return originalprice;
+	}
+	public void setOriginalprice(float originalprice) {
+		this.originalprice = originalprice;
+	}
+	public double getOffer() {
+		return offer;
+	}
+	public void setOffer(double offer) {
+		this.offer = offer;
+	}
 	public boolean isEnable() {
 		return enable;
 	}

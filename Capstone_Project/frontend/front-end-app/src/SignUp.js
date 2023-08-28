@@ -14,6 +14,7 @@ function SignUp (){
         try{
         let result = await axios.post("http://localhost:8080/Login/signUp",login);
         console.log(result.data);
+        alert("Account Created Successfully!! , please sign In")
         }catch(ex){
             console.log(ex);
         }
@@ -28,10 +29,10 @@ function SignUp (){
             <label>Password</label>
             <input type ="password" name ="password" onChange={e=>setPassword(e.target.value)}/><br/>
             <label></label>
-            <input type="radio" name="typeofuser" value="customer" onChange={e=>setTypeOfUser(e.target.value)}/>Customer<br/>           
+            <input type="radio" name="User " value="customer" onChange={e=>setTypeOfUser(e.target.value)}/>Customer<br/>           
             <input type="submit" value= "submit" />
             <input type="reset" value= "reset" /><br/>
-            <Link to="/">Login</Link>
+            <Link to="/Login">Login</Link>
             </form>
         </div>
     )

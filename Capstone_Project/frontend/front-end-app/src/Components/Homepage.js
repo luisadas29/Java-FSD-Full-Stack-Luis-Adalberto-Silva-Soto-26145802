@@ -1,6 +1,6 @@
 import React from "react";
-import image from "../Images/films.jpeg"
-import image2 from "../Images/OutdoorActivities.jpeg"
+import image from "../Images/Medicare1.jpg"
+import image2 from "../Images/Medicare2.jpg"
 
 const HomePage = () => {
    return(

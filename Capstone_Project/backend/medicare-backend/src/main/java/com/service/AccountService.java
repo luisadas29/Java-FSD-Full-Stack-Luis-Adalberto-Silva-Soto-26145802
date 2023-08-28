@@ -1,9 +1,14 @@
 package com.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medicare.Account;
+import com.medicare.Login;
+import com.medicare.Medicine;
 import com.repository.AccountRepository;
 
 @Service
@@ -16,4 +21,29 @@ public class AccountService {
 		accountRepository.save(account);
 		return "Account created";
 	}
+	
+	
+	  public float getAccountAmount(String email) {
+	        Account account = accountRepository.findByEmailid(email);
+	        if (account != null) {
+	            return account.getAmount();
+	        } else {
+	            return -1; // Return a default value or handle the case when account is not found
+	        }
+	    }
+	  
+	  public float modifyAccountAmount(String email, float newAmount) {
+	        Account account = accountRepository.findByEmailid(email);
+	        if (account != null) {
+	            account.setAmount(newAmount);
+	            accountRepository.save(account);
+	            return account.getAmount();
+	        } else {
+	            return -1; // Return a default value or handle the case when account is not found
+	        }
+	    }
+	  
+	  
+
+	    
 }

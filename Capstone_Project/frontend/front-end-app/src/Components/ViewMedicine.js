@@ -36,6 +36,8 @@ function ViewMedicine() {
 
     const handleUpdate = async (updatedMedicine) => {
         try {
+            const updatedPrice = updatedMedicine.originalprice * (1 - updatedMedicine.offer / 100);
+            updatedMedicine.price = updatedPrice;
             await axios.put(`http://localhost:8080/Medicine/${updatedMedicine.medicineid}`, updatedMedicine);
             loadMedicines(); // Refresh medicine list after update
             setEditMedicine(null); // Clear edit mode
@@ -43,6 +45,7 @@ function ViewMedicine() {
             console.error("Error updating medicine:", error);
         }
     };
+
 
     const handleSearch = async () => {
         if (searchQuery.trim() === "") {
@@ -99,6 +102,12 @@ function ViewMedicine() {
                         value={editedValues.inventory}
                         onChange={(e) => setEditedValues({ ...editedValues, inventory: e.target.value })}
                     />
+                    <input
+                       type="number"
+                     placeholder="Discount Percentage"
+                     value={editedValues.offer}
+                    onChange={(e) => setEditedValues({ ...editedValues, offer: e.target.value })}
+                     />
                     {/* Other input fields for editing */}
                     <button onClick={() => handleUpdate(editedValues)}>Update</button>
                 </td>
@@ -107,11 +116,12 @@ function ViewMedicine() {
                     <td>{medicine.medicineid}</td>
                     <td>{medicine.name}</td>
                     <td>{medicine.description}</td>
-                    <td>{medicine.price}</td>
+                    <td>£{medicine.price}</td>
                     <td>{medicine.inventory}</td>
                     <td>
                         <img src={medicine.imageurl} alt={medicine.name} width="100px" height="100px" />
                     </td>
+                    <td>{medicine.offer}%</td>
                     <td>
                         <button onClick={() => handleDelete(medicine.medicineid)}>Delete</button>
                         <button onClick={() => handleEdit(medicine)}>Edit</button>
@@ -150,6 +160,7 @@ function ViewMedicine() {
                         <th>Price</th>
                         <th>Stock</th>
                         <th>Image</th>
+                        <th>Offer % discount</th>
                         <th>Delete / Edit Record</th>
                         <th>Enable / Disabled </th>
                     </tr>

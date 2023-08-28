@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.repository.MedicineRepository;
 import com.medicare.Medicine;
+import com.exception.*;
 
 
 @Service
@@ -17,6 +18,8 @@ public class MedicineService {
 	MedicineRepository medicineRepository;
 	
 	public String createMedicine(Medicine medicine) {
+		medicine.setOriginalprice(medicine.getPrice());
+		medicine.setEnable(true);
 		medicineRepository.save(medicine);
 		return "Medicine created";
 	}
@@ -26,21 +29,6 @@ public class MedicineService {
 	    return medicineRepository.findAll();
 }
      
-// 	public String updateMedicine(Medicine p) {
-//		Optional <Medicine> result = medicineRepository.findById(p.getMedicineid());
-//		if(result.isPresent()) {
-//			Medicine medicine = result.get();
-//			medicine.setName(p.getName());
-//			medicine.setDescription(p.getDescription());
-//			medicine.setPrice(p.getPrice());
-//			medicine.setInventory(p.getInventory());
-//			medicine.setImageurl(p.getImageurl());
-//			medicineRepository.saveAndFlush(medicine);
-//			return "Medicine details updated successfully";
-//		}else {
-//			return "Medicine not present";
-//		}
-//	}
  	
 	public String deleteMedicine(int mid) {
 		Optional<Medicine> result = medicineRepository.findById(mid);
@@ -62,6 +50,10 @@ public class MedicineService {
         existingProduct.setPrice(updatedProduct.getPrice());
         existingProduct.setEnable(updatedProduct.isEnable());
         existingProduct.setImageurl(updatedProduct.getImageurl());
+        existingProduct.setOffer(updatedProduct.getOffer());
+        if (updatedProduct.getOffer() == 0) {
+        	existingProduct.setPrice(updatedProduct.getOriginalprice());
+        }
         medicineRepository.save(existingProduct);
     }
     
@@ -92,6 +84,22 @@ public class MedicineService {
             return "Medicine not found";
         }
     }
+    
+    public Medicine findMedicineById(int medicineId) {
+        return medicineRepository.findById(medicineId).orElse(null);
+    }
+    
+    public Medicine updateInventory(int medicineId, int newInventory) {
+        Optional<Medicine> optionalMedicine = medicineRepository.findById(medicineId);
+        if (optionalMedicine.isPresent()) {
+            Medicine medicine = optionalMedicine.get();
+            medicine.setInventory(newInventory);
+            return medicineRepository.save(medicine);
+        } else {
+            throw new NotFoundException("Medicine not found");
+        }
+    }
+    
 }
     
      

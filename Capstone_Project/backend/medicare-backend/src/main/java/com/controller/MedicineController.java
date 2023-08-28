@@ -39,10 +39,7 @@ public class MedicineController {
 		return medicineService.findAllMedicine();
 	}
 	
-//	@PutMapping(value = "updateMedicine",consumes = MediaType.APPLICATION_JSON_VALUE)
-//	public String updateMedicine(@RequestBody Medicine medicine) {
-//		return medicineService.updateMedicine(medicine);
-//	}
+
 	
     @PutMapping("/{medicineid}")
     public ResponseEntity<String> updateProduct(@PathVariable int medicineid, @RequestBody Medicine updatedMedicine) {
@@ -81,6 +78,27 @@ public class MedicineController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Medicine> getMedicineById(@PathVariable int id) {
+        Medicine medicine = medicineService.findMedicineById(id);
+        if (medicine != null) {
+            return new ResponseEntity<>(medicine, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @PutMapping("/updateInventory/{medicineId}")
+    public ResponseEntity<Medicine> updateInventory(@PathVariable int medicineId, @RequestParam int newInventory) {
+        try {
+            Medicine updatedMedicine = medicineService.updateInventory(medicineId, newInventory);
+            return ResponseEntity.ok(updatedMedicine);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
 }
 
 
