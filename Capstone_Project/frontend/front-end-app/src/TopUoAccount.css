@@ -1,0 +1,52 @@
+
+
+.top-up-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .success-message {
+    color: green;
+    margin-top: 1rem;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 1rem;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-group input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .top-up-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .top-up-button:hover {
+    background-color: #0056b3;
+  }
+  

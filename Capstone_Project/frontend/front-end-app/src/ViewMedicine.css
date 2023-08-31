@@ -1,27 +1,59 @@
-/* ViewMedicine Container */
-.view-medicine-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
-    justify-items: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    padding: 20px;
+.medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
   }
   
-  /* Medicine Card */
-  .medicine-card {
+  .medicine-table th,
+  .medicine-table td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 8px;
     text-align: center;
   }
   
-  .medicine-card img {
-    max-width: 100%;
-    height: auto;
+  .medicine-table th {
+    background-color: #f2f2f2;
   }
   
-  .medicine-card button {
-    margin-top: 5px;
+  .medicine-table img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+  .medicine-table button {
+    padding: 6px 10px;
+    margin-right: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .medicine-table button:hover {
+    background-color: #0056b3;
+  }
+  
+  .medicine-table input {
+    width: 100px;
+    padding: 5px;
+  }
+  
+  .medicine-table .edit-cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .medicine-table .edit-cell input {
+    width: auto;
+    flex: 1;
+  }
+  
+  .medicine-table .edit-buttons {
+    display: flex;
+  }
+  
+  .medicine-table .edit-buttons button {
+    margin-left: 5px;
   }
   

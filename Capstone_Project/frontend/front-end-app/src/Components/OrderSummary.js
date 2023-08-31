@@ -1,10 +1,10 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import "../OrderSummary.css"; // Import your CSS file for styling
+import "../OrderSummary.css"; 
 
 function OrderSummary() {
   const location = useLocation();
-  const { orderItems } = location.state || { orderItems: [] }; // Access the order items from state
+  const { orderItems } = location.state || { orderItems: [] }; 
   const totalCost = orderItems.reduce((total, item) => total + item.price, 0);
   console.log(orderItems);
 

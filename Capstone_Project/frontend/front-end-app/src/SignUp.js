@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './Signup.css'; // Import the CSS for styling
+import './Signup.css'; 
 
 function SignUp() {
   const [emailid, setEmailid] = useState('');
   const [password, setPassword] = useState('');
-  const [typeOfUser, setTypeOfUser] = useState('');
+  const [typeOfUser, setTypeOfUser] = useState('customer');
 
   const signIn = async (event) => {
     event.preventDefault();
@@ -25,8 +25,9 @@ function SignUp() {
   return (
     <div className="signup-container">
       <div className="signup-header">Account Creation</div>
+      <p>As a welcome bonus, you account will be credited £1000 to spend in the shop!</p>
       <form className="signup-form" onSubmit={signIn}>
-        <label>EmailId</label>
+        <label>Email</label>
         <input
           type="email"
           name="emailid"
@@ -42,7 +43,7 @@ function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <div className="radio-group">
+        {/* <div className="radio-group">
           <input
             type="radio"
             name="User"
@@ -50,7 +51,7 @@ function SignUp() {
             onChange={(e) => setTypeOfUser(e.target.value)}
           />
           <label>Customer</label>
-        </div>
+        </div> */}
         <input type="submit" className="submit-button" value="Submit" />
         <input type="reset" className="reset-button" value="Reset" />
         <br />

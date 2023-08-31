@@ -30,7 +30,7 @@ public class AccountService {
 	        if (account != null) {
 	            return account.getAmount();
 	        } else {
-	            return -1; // Return a default value or handle the case when account is not found
+	            return -1; 
 	        }
 	    }
 	  
@@ -41,7 +41,7 @@ public class AccountService {
 	            accountRepository.save(account);
 	            return account.getAmount();
 	        } else {
-	            return -1; // Return a default value or handle the case when account is not found
+	            return -1; 
 	        }
 	    }
 	  

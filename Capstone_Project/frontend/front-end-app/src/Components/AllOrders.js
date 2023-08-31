@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useUser } from '../UserContext';
-import "../Orders.css"; 
+import "../Orders.css";
 
 function AllOrders() {
   const [orderHistory, setOrderHistory] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [sortBy, setSortBy] = useState("orderDate"); // Default sort by orderDate
+  const [sortBy, setSortBy] = useState("orderDate"); 
   const [searchQuery, setSearchQuery] = useState("");
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; 
 
   useEffect(() => {
     fetchOrderHistory();
@@ -18,12 +18,9 @@ function AllOrders() {
     filterOrders();
   }, [orderHistory, searchQuery]);
 
-
-
   const fetchOrderHistory = async () => {
     try {
-  
-      const response = await axios.get(`http://localhost:8080/orders/allOrders`);
+      const response = await axios.get("http://localhost:8080/orders/allOrders");
       setOrderHistory(response.data);
     } catch (error) {
       console.error("Error fetching order history:", error);
@@ -31,10 +28,11 @@ function AllOrders() {
   };
 
   const filterOrders = () => {
-    const filtered = orderHistory.filter(order =>
-      order.orderid.toString().includes(searchQuery) ||
-      order.totalCost.toFixed(2).includes(searchQuery) ||
-      new Date(order.orderDate).toLocaleDateString().includes(searchQuery)
+    const filtered = orderHistory.filter(
+      (order) =>
+        order.orderid.toString().includes(searchQuery) ||
+        order.totalCost.toFixed(2).includes(searchQuery) ||
+        new Date(order.orderDate).toLocaleDateString().includes(searchQuery)
     );
     setFilteredOrders(filtered);
   };
@@ -55,51 +53,16 @@ function AllOrders() {
     }
   };
 
+  const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentOrders = filteredOrders.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
-//     <div className="container mt-4">
-//       <h2 className="orders-title">All Order History</h2>
-//       <table className="table orders-table">
-//         <thead>
-//           <tr>
-//             <th>Order ID</th>
-//             <th>Total Cost (£)</th>
-//             <th>Order Date</th>
-//             <th>Items</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {orderHistory.length > 0 ? (
-//             orderHistory.map(order => (
-//               <tr key={order.orderid}>
-            //     <td>{order.orderid}</td>
-            //     <td>{order.totalCost.toFixed(2)}</td>
-            //     <td>{new Date(order.orderDate).toLocaleDateString()}</td>
-            //     <td>
-            //       <ul className="order-items-list">
-            //         {order.orderItemStrings && order.orderItemStrings.length > 0 ? (
-            //           JSON.parse(order.orderItemStrings).map((item, index) => (
-            //             <li key={index}>{item}</li>
-            //           ))
-            //         ) : (
-            //           <li>No items</li>
-            //         )}
-            //       </ul>
-            //     </td>
-            //   </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="4" className="no-orders-text">
-//                 You have no order history.
-//               </td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-//}
     <div className="container mt-4">
       <h2 className="orders-title">All Order History</h2>
       <div className="filter-sort">
@@ -126,10 +89,10 @@ function AllOrders() {
           </tr>
         </thead>
         <tbody>
-          {filteredOrders.length > 0 ? (
-            filteredOrders.sort(compareOrders).map(order => (
+          {currentOrders.length > 0 ? (
+            currentOrders.sort(compareOrders).map((order) => (
               <tr key={order.orderid}>
-                                <td>{order.orderid}</td>
+                <td>{order.orderid}</td>
                 <td>{order.totalCost.toFixed(2)}</td>
                 <td>{new Date(order.orderDate).toLocaleDateString()}</td>
                 <td>
@@ -147,16 +110,28 @@ function AllOrders() {
             ))
           ) : (
             <tr>
-               <td colSpan="4" className="no-orders-text">
-                 You have no order history.
-               </td>
-             </tr>
+              <td colSpan="4" className="no-orders-text">
+                You have no order history.
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={currentPage === index + 1 ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default AllOrders;
+
 

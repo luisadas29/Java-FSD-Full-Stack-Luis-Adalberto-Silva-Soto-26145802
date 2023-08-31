@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useUser } from '../UserContext';
 import React, { useState, useEffect } from "react";
+import "../TopUoAccount.css"; 
 
 function TopUpAccount() {
   const user = useUser();
@@ -12,7 +13,6 @@ function TopUpAccount() {
   const [accountAmount, setAccountAmount] = useState(0); 
   const [errorMessage, setErrorMessage] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
-
 
   const handleTopUp = async () => {
 
@@ -29,6 +29,12 @@ function TopUpAccount() {
       if (response.data) {
         setSuccessMessage("Top-up successful!");
         setErrorMessage("");
+        setTotalAmount(0);
+        setCreditCardNumber("");
+        setExpiryDate("");
+        setCSV("");
+        loadAccountAmount();
+
       } else {
         setSuccessMessage("");
         setErrorMessage("Top-up failed. Please check your details and try again.");
@@ -60,11 +66,11 @@ useEffect(() => {
 }, [user]);
 
   return (
-    <div className="container mt-4">
+    <div className="top-up-container">
       <h2>Top Up Account</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <div>
+      <div className="input-group">
         <label>Amount to Deposit (£):</label>
         <input
           type="number"
@@ -72,7 +78,7 @@ useEffect(() => {
           onChange={(e) => setTotalAmount(e.target.value)}
         />
       </div>
-      <div>
+      <div className="input-group">
         <label>Credit Card Number:</label>
         <input
           type="text"
@@ -80,7 +86,7 @@ useEffect(() => {
           onChange={(e) => setCreditCardNumber(e.target.value)}
         />
       </div>
-      <div>
+      <div className="input-group">
         <label>Expiry Date:</label>
         <input
           type="text"
@@ -88,7 +94,7 @@ useEffect(() => {
           onChange={(e) => setExpiryDate(e.target.value)}
         />
       </div>
-      <div>
+      <div className="input-group">
         <label>CSV:</label>
         <input
           type="text"
@@ -96,9 +102,10 @@ useEffect(() => {
           onChange={(e) => setCSV(e.target.value)}
         />
       </div>
-      <button onClick={handleTopUp}>Top Up</button>
+      <button className="top-up-button" onClick={handleTopUp}>Top Up</button>
     </div>
   );
 }
 
 export default TopUpAccount;
+

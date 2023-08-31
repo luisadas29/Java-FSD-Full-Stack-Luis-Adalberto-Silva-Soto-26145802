@@ -42,7 +42,7 @@ function Orders() {
             orderHistory.map(order => (
               <tr key={order.orderid}>
                 <td>{order.orderid}</td>
-                <td>{order.totalCost.toFixed(2)}</td>
+                <td>£{order.totalCost.toFixed(2)}</td>
                 <td>{new Date(order.orderDate).toLocaleDateString()}</td>
                 <td>
                   <ul className="order-items-list">

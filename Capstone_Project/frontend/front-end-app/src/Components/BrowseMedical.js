@@ -112,8 +112,8 @@ function BrowseMedical() {
                     medicines: basket.map(item => ({ 
                         medicineid: item.medicineid, 
                         quantity: 1 ,
-                        name: item.name, // Adding medicine name
-                    price: item.price // Adding medicine price
+                        name: item.name, 
+                    price: item.price 
                     })), 
                     totalCost: totalCost
                 };
@@ -219,44 +219,7 @@ function BrowseMedical() {
           );
           
 
-        // return (
-        //     <div className="browse-medical-container">
-        //       <h2>View all Medicine Products</h2>
-        //       <div className="search-bar">
-        //         <input
-        //           type="text"
-        //           placeholder="Search by name"
-        //           value={searchQuery}
-        //           onChange={(e) => setSearchQuery(e.target.value)}
-        //         />
-        //         <button className="search-button" onClick={handleSearch}>Search</button>
-        //         <button className="show-all-button" onClick={loadMedicines}>Show All</button>
-        //       </div>
-        //       <table className="medicine-table">
-        //         <thead>
-        //           <tr>
-        //             <th>ID</th>
-        //             <th>Name</th>
-        //             <th>Description</th>
-        //             <th>Price</th>
-        //             <th>Stock</th>
-        //             <th>Image</th>
-        //             <th>Offer % discount</th>
-        //             <th></th>
-        //           </tr>
-        //         </thead>
-        //         <tbody>{medicineRecord}</tbody>
-        //       </table>
-        //       <div className="basket-checkout">
-        //         <Basket basketItems={basket} />
-        //         <div className="basket-summary">
-        //           <p>Total Basket Amount: £{totalBasketAmount.toFixed(2)}</p>
-        //           <p>Available to spend from your account: £{accountAmount.toFixed(2)}</p>
-        //           <button className="checkout-button" onClick={handlesCheckout}>Checkout</button>
-        //         </div>
-        //       </div>
-        //     </div>
-        //   );
+       
         }
         
         export default BrowseMedical;
