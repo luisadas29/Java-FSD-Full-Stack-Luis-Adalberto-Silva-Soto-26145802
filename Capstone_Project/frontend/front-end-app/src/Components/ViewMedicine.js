@@ -7,9 +7,7 @@ function ViewMedicine() {
     const [editedValues, setEditedValues] = useState({});
     const [searchQuery, setSearchQuery] = useState("");
 
-    // useEffect(() => {
-    //     loadMedicines();
-    // }, []);
+
 
     const loadMedicines = async () => {
         try {
@@ -108,7 +106,6 @@ function ViewMedicine() {
                      value={editedValues.offer}
                     onChange={(e) => setEditedValues({ ...editedValues, offer: e.target.value })}
                      />
-                    {/* Other input fields for editing */}
                     <button onClick={() => handleUpdate(editedValues)}>Update</button>
                 </td>
             ) : (
@@ -140,7 +137,7 @@ function ViewMedicine() {
 
     return (
         <div>
-            <h2>View all Medicine Products</h2>
+            <h2>Search Medicine Products</h2>
             <div>
                 <input
                     type="text"

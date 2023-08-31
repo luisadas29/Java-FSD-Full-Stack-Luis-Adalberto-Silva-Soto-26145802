@@ -1,0 +1,27 @@
+/* ViewMedicine Container */
+.view-medicine-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Medicine Card */
+  .medicine-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .medicine-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .medicine-card button {
+    margin-top: 5px;
+  }
+  

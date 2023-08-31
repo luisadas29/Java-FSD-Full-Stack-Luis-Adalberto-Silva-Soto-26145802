@@ -1,0 +1,45 @@
+/* Admin Container */
+.admin-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    gap: 20px;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Admin Header */
+  .admin-header {
+    grid-row: 1;
+    justify-self: center;
+  }
+  
+  /* Admin Navigation */
+  .admin-nav {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .admin-nav a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+  }
+  
+  .admin-nav a:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Admin Horizontal Rule */
+  .admin-hr {
+    grid-row: 3;
+    width: 100%;
+    margin: 0;
+  }
+  

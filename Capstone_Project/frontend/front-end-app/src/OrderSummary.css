@@ -1,0 +1,35 @@
+.order-summary {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .order-summary h2 {
+    margin-bottom: 10px;
+  }
+  
+  .order-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .order-items li {
+    margin-bottom: 5px;
+  }
+  
+  .total-cost {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

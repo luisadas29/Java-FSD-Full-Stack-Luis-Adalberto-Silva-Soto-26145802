@@ -11,7 +11,10 @@ import ViewMedicine from './Components/ViewMedicine';
 import BrowseMedical from "./Components/BrowseMedical";
 import React, { useState } from "react";
 import { UserProvider } from './UserContext';
-import Checkout from "./Components/Checkout";
+import Orders from './Components/Orders'
+import OrderSummary from './Components/OrderSummary'
+import AllOrders from './Components/AllOrders'
+import TopUpAccount from './Components/TopUpAccount'
 
 
 
@@ -48,13 +51,15 @@ function App() {
         <Route path='/admin' element={<Admin/>}>
           <Route path ="addMedicine" element={<AddMedicine/>}/>
           <Route path ="viewMedicine" element={<ViewMedicine/>}/>
+          <Route path ="allOrders" element={<AllOrders/>}/>
         </Route>
         <Route path="/customer" element={<Customer basket={basket} setBasket={setBasket} />}>
           <Route path="browseMedical" element={<BrowseMedical basket={basket} setBasket={setBasket} />} />
+          <Route path="orders" element={<Orders/>}/>
+          <Route path="topUpAccount" element={<TopUpAccount/>}/>
         </Route>
-        <Route path="/customer/checkout" element={<Checkout basketItems={basket} />} />
-
-
+         <Route path="/customer/browseMedical/order-summary" element={<OrderSummary/>} /> 
+        {/* <Route path="/customer/checkout" element={<Checkout basketItems={basket} />} /> */}
       </Routes>
       </UserProvider>
     </div>

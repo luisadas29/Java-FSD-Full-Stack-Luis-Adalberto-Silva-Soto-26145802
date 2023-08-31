@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Basket from "./Basket";
 import { useUser } from '../UserContext';
-
+import "../BrowseMedical.css";
+import { Link, useNavigate } from "react-router-dom"; 
 
 function BrowseMedical() {
     const [medicines, setMedicines] = useState([]);
@@ -11,6 +12,7 @@ function BrowseMedical() {
     const [totalBasketAmount, setTotalBasketAmount] = useState(0);
     const [accountAmount, setAccountAmount] = useState(0); 
     const user = useUser(); 
+    const navigate = useNavigate();
     
 
     useEffect(() => {
@@ -70,23 +72,24 @@ function BrowseMedical() {
         }
     }, [user]);
 
-      
+    const removeItemFromBasket = (medicineId) => {
+        const updatedBasket = basket.filter(item => item.medicineid !== medicineId);
+        setBasket(updatedBasket);
+        const removedItem = basket.find(item => item.medicineid === medicineId);
+        setTotalBasketAmount(prevTotal => prevTotal - removedItem.price);
+      };
 
-    const handleCheckout = async (userEmail) => {
+ 
+
+    const handlesCheckout = async () => {
         try {
-            
             if (!user) {
                 console.log("User not logged in");
                 return;
             }
-
+    
             const usersEmail = user.userEmail;
             console.log("User Email:", usersEmail);
-
-            // Fetch user's account amount using userEmail
-            const accountResponse = await axios.get(`http://localhost:8080/account/amount?email=${usersEmail}`);
-            const accountAmount = accountResponse.data;
-            console.log("User's Account Amount:", accountAmount);
     
             // Calculate the total cost of items in the basket
             const totalCost = basket.reduce((total, item) => total + item.price, 0);
@@ -104,37 +107,47 @@ function BrowseMedical() {
             const canCheckout = accountAmount >= totalCost && medicines.every((medicine) => medicine.inventory > 0);
     
             if (canCheckout) {
-                // Deduct the inventory of medicines and the account amount
+                const checkoutRequest = {
+                    userEmail: usersEmail,
+                    medicines: basket.map(item => ({ 
+                        medicineid: item.medicineid, 
+                        quantity: 1 ,
+                        name: item.name, // Adding medicine name
+                    price: item.price // Adding medicine price
+                    })), 
+                    totalCost: totalCost
+                };
+            if (canCheckout){
                 const updateMedicinePromises = medicines.map(async (medicine) => {
                     const updatedInventory = medicine.inventory - 1;
                     await axios.put(`http://localhost:8080/Medicine/updateInventory/${medicine.medicineid}?newInventory=${updatedInventory}`);
                 });
-
+            };
                 const updatedAccountAmount = accountAmount - totalCost;
-            const modifyAccountResponse = await axios.put(`http://localhost:8080/account/modify?email=${usersEmail}&newAmount=${updatedAccountAmount}`);
-            const modifiedAccountAmount = modifyAccountResponse.data;
-            console.log("Modified Account Amount:", modifiedAccountAmount);
     
-                
-                await Promise.all(updateMedicinePromises);
+                // Send the checkout request to create an order
+                const createOrderResponse = await axios.post("http://localhost:8080/orders/checkout", checkoutRequest);
+    
+                console.log("Order created successfully. Order ID:", createOrderResponse.data);
+                console.log(basket);
+                navigate("./order-summary",  { state: { orderItems: basket } });
     
                 // Clear the basket after successful checkout
                 setBasket([]);
                 loadMedicines();
-                setAccountAmount(modifiedAccountAmount);
-                
-    
-                // Implement any additional UI feedback
-                console.log("Checkout Successful!");
                 setTotalBasketAmount(0);
+                setAccountAmount(updatedAccountAmount);
+                
             } else {
                 console.log("Checkout Failed: Insufficient Balance or Inventory");
             }
+            //navigate("order-summary", { state: { orderItems: basket } });
         } catch (error) {
             console.error("Error during checkout:", error);
         }
     };
     
+
 
     useEffect(() => {
         console.log("Basket Items:", basket);
@@ -162,44 +175,88 @@ function BrowseMedical() {
         </tr>
         ));
 
-    return (
-        <div>
-            <h2>View all Medicine Products</h2>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Search by name"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button onClick={handleSearch}>Search</button>
-                <button onClick={loadMedicines}>Show All</button>
-            </div>
-            <table>
+        return (
+            <div className="browse-medical-container">
+              <h2>View all Medicine Products</h2>
+              <div className="search-bar">
+               <input
+                   type="text"
+                   placeholder="Search by name"
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                 />
+                     <button className="search-button" onClick={handleSearch}>Search</button>
+                <button className="show-all-button" onClick={loadMedicines}>Show All</button>
+              </div>
+              <table className="medicine-table">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Image</th>
-                        <th>Offer % discount</th>
-                        <th></th>
-                    </tr>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                    <th>Offer % discount (Already Applied in Price)</th>
+                    <th></th>
+                  </tr>
                 </thead>
                 <tbody>{medicineRecord}</tbody>
-            </table>
-            {/* Render the Basket component */}
-            <Basket basketItems={basket} />
-            <p>Total Basket Amount: £{totalBasketAmount.toFixed(2)}</p> |
-            <p>Available to spend from your account : £{accountAmount.toFixed(2)}</p>
-              |
-            <></>
-            <button onClick={handleCheckout}>Checkout</button>
+              </table>
+              <div className="basket-checkout">
+                <Basket basketItems={basket} onRemoveItem={removeItemFromBasket} />
+                <div className="basket-summary">
+                  <p>Total Basket Amount: £{totalBasketAmount.toFixed(2)}</p>
+                  <br></br>
+                  <p>Available to spend from your account: £{accountAmount.toFixed(2)}</p>
+                  <button className="checkout-button" onClick={handlesCheckout}>
+                    Checkout
+                  </button>
+               
+                </div>
+              </div>
+            </div>
+          );
+          
 
-        </div>
-    );
-}
-
-export default BrowseMedical;
+        // return (
+        //     <div className="browse-medical-container">
+        //       <h2>View all Medicine Products</h2>
+        //       <div className="search-bar">
+        //         <input
+        //           type="text"
+        //           placeholder="Search by name"
+        //           value={searchQuery}
+        //           onChange={(e) => setSearchQuery(e.target.value)}
+        //         />
+        //         <button className="search-button" onClick={handleSearch}>Search</button>
+        //         <button className="show-all-button" onClick={loadMedicines}>Show All</button>
+        //       </div>
+        //       <table className="medicine-table">
+        //         <thead>
+        //           <tr>
+        //             <th>ID</th>
+        //             <th>Name</th>
+        //             <th>Description</th>
+        //             <th>Price</th>
+        //             <th>Stock</th>
+        //             <th>Image</th>
+        //             <th>Offer % discount</th>
+        //             <th></th>
+        //           </tr>
+        //         </thead>
+        //         <tbody>{medicineRecord}</tbody>
+        //       </table>
+        //       <div className="basket-checkout">
+        //         <Basket basketItems={basket} />
+        //         <div className="basket-summary">
+        //           <p>Total Basket Amount: £{totalBasketAmount.toFixed(2)}</p>
+        //           <p>Available to spend from your account: £{accountAmount.toFixed(2)}</p>
+        //           <button className="checkout-button" onClick={handlesCheckout}>Checkout</button>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   );
+        }
+        
+        export default BrowseMedical;

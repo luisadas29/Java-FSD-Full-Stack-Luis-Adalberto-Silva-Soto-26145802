@@ -1,41 +1,65 @@
-import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
-function SignUp (){
-    let [emailid,setEmailid]=useState("");
-    let [password,setPassword]=useState("");
-    let [typeOfUser,setTypeOfUser]=useState("");
 
-    let signIn=async (event)=> {
-        event.preventDefault();
-        //console.log(emailid +" "+password+" "+typeofuser);
-        let login = {"emailid":emailid,"password":password,"typeOfUser":typeOfUser};
-        try{
-        let result = await axios.post("http://localhost:8080/Login/signUp",login);
-        console.log(result.data);
-        alert("Account Created Successfully!! , please sign In")
-        }catch(ex){
-            console.log(ex);
-        }
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Signup.css'; // Import the CSS for styling
+
+function SignUp() {
+  const [emailid, setEmailid] = useState('');
+  const [password, setPassword] = useState('');
+  const [typeOfUser, setTypeOfUser] = useState('');
+
+  const signIn = async (event) => {
+    event.preventDefault();
+    const login = { emailid, password, typeOfUser };
+    try {
+      const result = await axios.post('http://localhost:8080/Login/signUp', login);
+      console.log(result.data);
+      alert('Account Created Successfully!! Please sign in.');
+    } catch (ex) {
+      console.log(ex);
     }
+  };
 
-    return(
-        <div>
-            <div>Account Create</div>
-            <form onSubmit={signIn}>
-            <label>EmailId</label>
-            <input type ="email" name ="emailid" onChange={e=>setEmailid(e.target.value)}/><br/>
-            <label>Password</label>
-            <input type ="password" name ="password" onChange={e=>setPassword(e.target.value)}/><br/>
-            <label></label>
-            <input type="radio" name="User " value="customer" onChange={e=>setTypeOfUser(e.target.value)}/>Customer<br/>           
-            <input type="submit" value= "submit" />
-            <input type="reset" value= "reset" /><br/>
-            <Link to="/Login">Login</Link>
-            </form>
+  return (
+    <div className="signup-container">
+      <div className="signup-header">Account Creation</div>
+      <form className="signup-form" onSubmit={signIn}>
+        <label>EmailId</label>
+        <input
+          type="email"
+          name="emailid"
+          className="signup-input"
+          onChange={(e) => setEmailid(e.target.value)}
+        />
+        <br />
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          className="signup-input"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <div className="radio-group">
+          <input
+            type="radio"
+            name="User"
+            value="customer"
+            onChange={(e) => setTypeOfUser(e.target.value)}
+          />
+          <label>Customer</label>
         </div>
-    )
+        <input type="submit" className="submit-button" value="Submit" />
+        <input type="reset" className="reset-button" value="Reset" />
+        <br />
+        <Link to="/Login" className="login-link">
+          Login
+        </Link>
+      </form>
+    </div>
+  );
 }
 
 export default SignUp;

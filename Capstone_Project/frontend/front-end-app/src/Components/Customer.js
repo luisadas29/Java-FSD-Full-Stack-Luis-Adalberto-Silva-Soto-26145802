@@ -8,6 +8,7 @@ function Customer(){
             <h2>Welcome to Customer Home Page</h2>
             <Link to="browseMedical">Purchase Medicines!</Link> |
             <Link to ="orders">View Past Orders</Link> |
+            <Link to ="topUpAccount">Top Up Account</Link> |
             <Link to="/">Logout</Link> |
             <hr/>
             <Outlet></Outlet>

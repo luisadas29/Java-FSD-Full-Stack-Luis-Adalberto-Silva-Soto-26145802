@@ -1,0 +1,51 @@
+/* BrowseMedical container */
+.browse-medical-container {
+    padding: 20px;
+  }
+  
+  /* Search bar */
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  /* Medicine table */
+  .medicine-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .medicine-table th,
+  .medicine-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Basket and checkout section */
+  .basket-checkout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+  
+  /* Basket summary */
+  .basket-summary {
+    text-align: right;
+  }
+  
+  /* Checkout button */
+  .checkout-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .checkout-button:hover {
+    background-color: #0056b3;
+  }
+  

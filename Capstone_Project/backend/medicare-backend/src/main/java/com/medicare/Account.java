@@ -12,6 +12,8 @@ public class Account {
 	private int accno;
 	private String emailid;
 	private float amount;
+	
+	
 	public int getAccno() {
 		return accno;
 	}

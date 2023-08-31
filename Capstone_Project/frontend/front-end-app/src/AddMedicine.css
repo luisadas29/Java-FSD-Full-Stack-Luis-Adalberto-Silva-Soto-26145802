@@ -1,0 +1,43 @@
+/* AddMedicine Container */
+.add-medicine-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* AddMedicine Header */
+  .add-medicine-header {
+    margin: 0;
+  }
+  
+  /* AddMedicine Form */
+  .add-medicine-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    justify-items: center;
+    width: 300px;
+  }
+  
+  .add-medicine-form label {
+    text-align: left;
+  }
+  
+  .add-medicine-form input {
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .add-medicine-form input[type='checkbox'] {
+    width: auto;
+  }
+  
+  .add-medicine-form input[type='submit'],
+  .add-medicine-form input[type='reset'] {
+    margin-top: 10px;
+  }
+  
